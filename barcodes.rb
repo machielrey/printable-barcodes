@@ -1,6 +1,7 @@
 require 'rest-client'
 require 'json'
 require 'erb'
+require 'csv'
 
 DEFAULT_CREDENTIALS="https://502d468c1ea10fc317000032:3_wGdBaMiqtO-HMkf3t6@app-testing.embarkmobile.com"
 
@@ -17,3 +18,11 @@ erb = ERB.new(File.read('barcodes.erb'))
 
 out = open("barcodes.html", "w")
 out.puts erb.result(binding)
+
+
+CSV.open('barcodes.csv', 'w') do |csv|
+  csv << ["Name", "Barcode"]
+  response.each do |enrollment|
+    csv << [enrollment["name"], enrollment["enrollment"]["url"]]
+  end
+end

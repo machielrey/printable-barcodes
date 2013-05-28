@@ -1,0 +1,32 @@
+<html>
+<head>
+<link rel="stylesheet" href="print.css" />
+</head>
+<body>
+<% counter = 0 %>
+<% users.each do |name, barcode|
+   counter += 1
+   if counter % 3 == 1 && counter > 1
+     klass = 'first'
+   else
+     klass = 'second'
+   end
+   %>
+   
+   <table class="<%= klass %>" border="0"><tr>
+      <td><img src="<%= barcode %>" width="250" height="250" /></td>
+      <td>
+        <h1 ><%= name %></h1>
+        <p>To enroll, open the (app name here) app on your phone or tablet,
+        and press "Tap here to scan barcode".</p>
+        <p>Hold the device in front of the barcode so that the entire barcode is visible
+        inside the inner rectange on the screen.</p>
+        <p>If it does not scan immediately, try to move the device closer or further from 
+        the barcode until it scans.</p>
+      </td>
+      </tr>
+   </table>
+   <hr/>
+<% end %>
+</body>
+</html>
